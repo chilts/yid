@@ -1,0 +1,22 @@
+{
+  "name": "yid",
+  "version": "1.0.0",
+  "description": "A small and fast ID generator that produces ordered IDs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chilts/yid.git"
+  },
+  "keywords": [
+    "id"
+  ],
+  "author": "Andrew Chilton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chilts/yid/issues"
+  },
+  "homepage": "https://github.com/chilts/yid#readme"
+}
