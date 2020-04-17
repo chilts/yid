@@ -1,7 +1,8 @@
 const yid = require('.')
 
-let id
-var count = {
+// setup
+const times = 1000000
+const count = {
   '22' : 0,
   '23' : 0,
   '24' : 0,
@@ -21,18 +22,30 @@ var count = {
   '38' : 0,
 }
 
-for(let i = 0; i < 10000000; i++) {
+// tests
+let id = ''
+
+for(let i = 0; i < times; i++) {
   id = yid()
   count['' + id.length]++
+
+  // check we can get the date back
+  const d = yid.toDate(id)
+  if (!(d instanceof Date)) {
+    throw new Error("toDate() returned something that wasn't a date!")
+  }
+  if (String(d.valueOf()) != id.split('-')[0]) {
+    throw new Error("the date's epoch (d.valueOf()) didn't match the epoch of the id")
+  }
 }
 
 console.log('count:', count)
 
-if ( count['27'] !== 10000000 ) {
+if ( count['27'] !== times ) {
   throw new Error("A yid was returned that wasn't 27 chars long")
 }
 
-for(let i = 1; i < 1000; i++ ) {
+for(let i = 1; i < times; i++ ) {
   id = yid()
 
   if ( id.split('-').length !== 2 ) {
