@@ -19,6 +19,33 @@ A `yid` is:
 * starts off with `Date.now()`
 * uses a substring of https://www.npmjs.com/package/math-random for the second part
 
+## `yid.asDate(id)` ##
+
+Returns the numbers from the first part of the `id` as a `Date()`.
+
+```js
+yid.asDate(id)
+// -> Date: "2018-01-27T10:46:29.798Z"
+```
+
+## `yid.asEpoch(id)` ##
+
+Returns the numbers from the first part of the `id` as a `Number()`.
+
+```js
+yid.asEpoch(id)
+// -> Number: 1517049989798
+```
+
+## `yid.asRandom(id)` ##
+
+Returns the random collection of digits from the second part of the `id`.
+
+```js
+yid.asRandom(id)
+// -> "7496988299172"
+```
+
 ## Why? ##
 
 Why another ID generating library?

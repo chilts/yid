@@ -10,14 +10,31 @@ function yid() {
   return id
 }
 
-function toDate(id) {
+function asDate(id) {
   if ( !id.match(/^\d{13}-\d{13}$/) ) {
-    throw new Error(`Format of id is incorrect: ${id}`)
+    throw new Error(`yid.asDate(): Format of id is incorrect: ${id}`)
   }
   const epoch = id.split('-')[0]
   return new Date(Number(epoch))
 }
 
-yid.toDate = toDate
+function asEpoch(id) {
+  if ( !id.match(/^\d{13}-\d{13}$/) ) {
+    throw new Error(`yid.asEpoch(): Format of id is incorrect: ${id}`)
+  }
+  const epoch = id.split('-')[0]
+  return Number(epoch)
+}
+
+function asRandom(id) {
+  if ( !id.match(/^\d{13}-\d{13}$/) ) {
+    throw new Error(`yid.asRandom(): Format of id is incorrect: ${id}`)
+  }
+  return id.split('-')[1]
+}
+
+yid.asDate = asDate
+yid.asEpoch = asEpoch
+yid.asRandom = asRandom
 
 module.exports = yid
