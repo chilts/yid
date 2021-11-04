@@ -1,13 +1,20 @@
 const mathRandom = require('math-random')
 
-function yid() {
-  let id = Date.now() + '-' + String(mathRandom()).substr(2, 13)
-
+function pad(id) {
   while ( id.length < 27 ) {
     id += '0'
   }
-
   return id
+}
+
+function yid() {
+  let id = Date.now() + '-' + String(mathRandom()).substr(2, 13)
+  return pad(id)
+}
+
+function fromDate(d) {
+  let id = d.valueOf() + '-' + String(mathRandom()).substr(2, 13)
+  return pad(id)
 }
 
 function asDate(id) {
@@ -33,6 +40,7 @@ function asRandom(id) {
   return id.split('-')[1]
 }
 
+yid.fromDate = fromDate
 yid.asDate = asDate
 yid.asEpoch = asEpoch
 yid.asRandom = asRandom

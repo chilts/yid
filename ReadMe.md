@@ -19,6 +19,25 @@ A `yid` is:
 * starts off with `Date.now()`
 * uses a substring of https://www.npmjs.com/package/math-random for the second part
 
+## `yid.fromDate(d)` ##
+
+Pass in a `Date` object, and get a yid back. This is great if you want to
+timestamp something in the past or the future, rather than right now.
+
+
+```js
+const yid = require('yid')
+
+// get the date at the start of the day
+const date = new Date()
+date.setUTCHours(0)
+date.setUTCMinutes(0)
+date.setUTCSeconds(0)
+date.setUTCMilliseconds(0)
+console.log(yid.fromDate(date))
+// -> 1635984000000-4266433825250
+```
+
 ## `yid.asDate(id)` ##
 
 Returns the numbers from the first part of the `id` as a `Date()`.

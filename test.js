@@ -26,7 +26,7 @@ const count = {
 let id = ''
 
 for(let i = 0; i < times; i++) {
-  id = yid()
+  id = (i%2) ? yid() : yid.fromDate(new Date())
   count['' + id.length]++
 
   // .asDate()
