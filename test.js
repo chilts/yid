@@ -22,6 +22,8 @@ const count = {
   '38' : 0,
 }
 
+let base62Count = 0
+
 // tests
 let id = ''
 
@@ -49,10 +51,20 @@ for(let i = 0; i < times; i++) {
   if (yid.asRandom(id) != id.split('-')[1]) {
     throw new Error("the date's random part didn't match the that of the id")
   }
+
+  // test the base62 version
+  id = yid.base62()
+  if ( id.length === 17 ) {
+    base62Count += 1
+  }
 }
 
 if ( count['27'] !== times ) {
   throw new Error("A yid was returned that wasn't 27 chars long")
+}
+
+if ( base62Count !== times ) {
+  throw new Error("A yid.base62() was returned that wasn't 17 chars long")
 }
 
 for(let i = 1; i < times; i++ ) {
@@ -65,5 +77,37 @@ for(let i = 1; i < times; i++ ) {
   // 1517049989798-7496988299172
   if ( !id.match(/^\d{13}-\d{13}$/) ) {
     throw new Error("A yid was returned that wasn't of the format DDDDDDDDDDDDD-DDDDDDDDDDDDD : " + id)
+  }
+}
+
+// check for prefixes (regular)
+for(let i = 1; i < times; i++ ) {
+  id = yid('prj')
+
+  if ( id.split('-').length !== 3 ) {
+    throw new Error("A prefixed yid was returned that didn't have three sections around the dash : " + id)
+  }
+
+  // prj-1517049989798-7496988299172
+  // console.log('id:', id)
+  // console.log('match:', id.match(/^prj-\d{13}-\d{13}$/))
+  if ( !id.match(/^prj-\d{13}-\d{13}$/) ) {
+    throw new Error("A prefixed yid was returned that wasn't of the format xxx-DDDDDDDDDDDDD-DDDDDDDDDDDDD : " + id)
+  }
+}
+
+// check for prefixes (base62)
+for(let i = 1; i < times; i++ ) {
+  id = yid.base62('prj')
+
+  if ( id.split('-').length !== 3 ) {
+    throw new Error("A prefixed base62 yid was returned that didn't have three sections around the dash : " + id)
+  }
+
+  // prj-0UcpUbzy-2iGH8g3D
+  // console.log('id:', id)
+  // console.log('match:', id.match(/^prj-[0-1a-zA-Z]{8}-[0-9a-zA-Z]{8}$/))
+  if ( !id.match(/^prj-[0-9a-zA-Z]{8}-[0-9a-zA-Z]{8}$/) ) {
+    throw new Error("A prefixed base62 yid was returned that wasn't of the format xxx-XXXXXXXX-XXXXXXXX : " + id)
   }
 }
