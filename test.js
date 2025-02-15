@@ -26,6 +26,7 @@ const count = {
 let id = ''
 
 for(let i = 0; i < times; i++) {
+  // test both yid() and .fromDate()
   id = (i%2) ? yid() : yid.fromDate(new Date())
   count['' + id.length]++
 
