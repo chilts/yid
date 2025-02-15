@@ -49,7 +49,7 @@ A base62 `yid` is:
 * has two parts:
   * a timestamp
   * a random string
-* is of the form `[0-9a-zA-Z]{13}-[0-9a-zA-Z]{8}`
+* is of the form `[0-9A-Za-z]{8}-[0-9A-Za-z]{8}`
 * starts off with `Date.now()` in base62
 * ends with a random set of numbers in base62
 
